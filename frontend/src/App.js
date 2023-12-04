@@ -1,106 +1,71 @@
 import "./App.css";
 import React, { useContext, useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import NavigationBar from "./components/navigationbar";
-import UserLogin from "./pages/user/login";
 import { AuthContext } from "./context/user_context";
-import Protected from "./components/protected";
-import MySettings from "./pages/user/settings";
-import MyComments from "./pages/user/comments";
-import AddComment from "./pages/user/add_comment";
-import AddSubmission from "./pages/user/add_submission";
-import RegisterAccount from "./pages/user/register";
-import CommentDisplay from "./components/comment_display";
 import HTTPRequester from "./utility/requester";
-import StoryViewer from "./components/story_viewer";
-import SearchPage from "./pages/user/search";
+import NavigationBar from "./components/navigationbar";
+import AppRoutes from "./components/routes";
+import "./App.css";
+import LoaderSpinner from "./components/util/loader";
 
 function App() {
+  const appStatus = HTTPRequester();
+  const loginStatus = HTTPRequester();
   const [authState, setAuthState] = useContext(AuthContext);
-  const { dataFeed, errorFeed, submitRequest: getData } = HTTPRequester();
-  const [processingLoad, setLoading] = useState(true);
+  const [processingLoad, setLoading] = useState(["app_status"]);
+  const [isOffline, setOffline] = useState(true);
+
+  let removeStatus = (status) => {
+    let newLoad = processingLoad.filter((item) => item !== status);
+    setLoading(newLoad);
+  };
 
   useEffect(() => {
-    if (errorFeed !== null) {
-      localStorage.clear();
-      setLoading(false);
+    if (appStatus.errorFeed) {
+      removeStatus("app_status");
     }
+    if (appStatus.dataFeed && appStatus.dataFeed.results === "online") {
+      setOffline(false);
+      removeStatus("app_status");
+    } else {
+      appStatus.submitRequest("checkonline", "GET");
+    }
+  }, [appStatus.dataFeed, appStatus.errorFeed]);
 
-    if (dataFeed !== null && errorFeed === null) {
-      setAuthState({ userLoggedIn: true, userData: dataFeed.results });
-      setLoading(false);
+  useEffect(() => {
+    if (loginStatus.dataFeed !== null && loginStatus.errorFeed === null) {
+      setAuthState({
+        userLoggedIn: true,
+        userData: loginStatus.dataFeed.results,
+      });
     } else {
       if (localStorage.getItem("user_token")) {
-        getData("user/check_logged_in", "GET");
-      } else {
-        setLoading(false);
+        loginStatus.submitRequest("user/check_logged_in", "GET");
       }
     }
-  }, [dataFeed, errorFeed]);
+  }, [loginStatus.dataFeed, loginStatus.errorFeed]);
 
   return (
     <>
-      {processingLoad === false ? (
-        <>
-          <NavigationBar />
-          <article>
-            <p class="content">
-              <Router>
-                <Routes>
-                  <Route path="/" element={<StoryViewer author="" />} />
-                  <Route path="/login" element={<UserLogin />} />
-                  <Route path="/viewcomments" element={<CommentDisplay />} />
-                  <Route path="/register" element={<RegisterAccount />}></Route>
-                  <Route path="/search" element={<SearchPage />} />
-                  <Route
-                    path="/addsubmission"
-                    element={
-                      <Protected isLoggedIn={authState.userLoggedIn}>
-                        <AddSubmission />
-                      </Protected>
-                    }
-                  />
-                  <Route
-                    path="/addcomment"
-                    element={
-                      <Protected isLoggedIn={authState.userLoggedIn}>
-                        <AddComment />
-                      </Protected>
-                    }
-                  />
-
-                  <Route
-                    path="/mysettings"
-                    element={
-                      <Protected isLoggedIn={authState.userLoggedIn}>
-                        <MySettings />
-                      </Protected>
-                    }
-                  />
-                  <Route
-                    path="/mysubmissions"
-                    element={
-                      <Protected isLoggedIn={authState.userLoggedIn}>
-                        <StoryViewer author="stories/mystories" />
-                      </Protected>
-                    }
-                  />
-                  <Route
-                    path="/mycomments"
-                    element={
-                      <Protected isLoggedIn={authState.userLoggedIn}>
-                        <MyComments />
-                      </Protected>
-                    }
-                  />
-                </Routes>
-              </Router>{" "}
-            </p>
-          </article>
-        </>
-      ) : (
-        ""
-      )}
+      <NavigationBar />
+      <article>
+        <p className="content">
+          {processingLoad.length === 0 ? (
+            <>
+              {isOffline === false ? (
+                <AppRoutes authState={authState} />
+              ) : (
+                <p className="content" align="center">
+                  <h3>Application Offline - Could Not Connect to API</h3>
+                </p>
+              )}
+            </>
+          ) : (
+            <div className="loading-container">
+              <LoaderSpinner />
+            </div>
+          )}
+        </p>
+      </article>
     </>
   );
 }
