@@ -32,7 +32,7 @@ function App() {
   }, [appStatus.dataFeed, appStatus.errorFeed]);
 
   useEffect(() => {
-    if (loginStatus.dataFeed !== null && loginStatus.errorFeed === null) {
+    if (loginStatus.dataFeed && !loginStatus.errorFeed) {
       setAuthState({
         userLoggedIn: true,
         userData: loginStatus.dataFeed.results,
