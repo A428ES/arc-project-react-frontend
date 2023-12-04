@@ -4,7 +4,6 @@ import { AuthContext } from "./context/user_context";
 import HTTPRequester from "./utility/requester";
 import NavigationBar from "./components/navigationbar";
 import AppRoutes from "./components/routes";
-import "./App.css";
 import LoaderSpinner from "./components/util/loader";
 
 function App() {
