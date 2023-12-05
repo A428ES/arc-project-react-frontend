@@ -10,21 +10,11 @@ function App() {
   const appStatus = HTTPRequester();
   const loginStatus = HTTPRequester();
   const [authState, setAuthState] = useContext(AuthContext);
-  const [processingLoad, setLoading] = useState(["app_status"]);
   const [isOffline, setOffline] = useState(true);
 
-  let removeStatus = (status) => {
-    let newLoad = processingLoad.filter((item) => item !== status);
-    setLoading(newLoad);
-  };
-
   useEffect(() => {
-    if (appStatus.errorFeed) {
-      removeStatus("app_status");
-    }
-    if (appStatus.dataFeed && appStatus.dataFeed.results === "online") {
+    if (appStatus.dataFeed?.results === "online") {
       setOffline(false);
-      removeStatus("app_status");
     } else {
       appStatus.submitRequest("checkonline", "GET");
     }
@@ -48,7 +38,7 @@ function App() {
       <NavigationBar />
       <article>
         <p className="content">
-          {processingLoad.length === 0 ? (
+          {!appStatus.loading ? (
             <>
               {isOffline === false ? (
                 <AppRoutes authState={authState} />
