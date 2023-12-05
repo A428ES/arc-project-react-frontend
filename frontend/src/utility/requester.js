@@ -3,6 +3,7 @@ import { useState } from "react";
 export default function HTTPRequester() {
   const [dataFeed, setData] = useState(null);
   const [errorFeed, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const submitRequest = async (
     path = "",
@@ -46,7 +47,9 @@ export default function HTTPRequester() {
     } catch (error) {
       setError("A network error occurred");
     }
+
+    setLoading(false);
   };
 
-  return { dataFeed, errorFeed, submitRequest };
+  return { dataFeed, errorFeed, loading, submitRequest };
 }
