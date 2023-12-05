@@ -1,10 +1,8 @@
-import React, { useContext, useState } from "react";
-import { AuthContext } from "../../context/user_context";
+import React, { useState } from "react";
 import PageTitle from "../../components/page_title";
 import StoryViewer from "../../components/story_viewer";
 
 export default function SearchPage() {
-  const [authState, setAuthState] = useContext(AuthContext);
   const [searchString, setSearchString] = useState();
   const [results, setResults] = useState();
 
