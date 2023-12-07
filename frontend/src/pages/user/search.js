@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PageTitle from "../../components/page_title";
+import PageTitle from "../../components/layout/PageTitle";
 import StoryViewer from "../../components/story_viewer";
 
 export default function SearchPage() {

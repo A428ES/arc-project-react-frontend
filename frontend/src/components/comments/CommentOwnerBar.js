@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import HTTPRequester from "../utility/requester";
+import HTTPRequester from "../../utility/requester";
 
 export default function CommentOwnerBar(prop) {
   let deleteView = (

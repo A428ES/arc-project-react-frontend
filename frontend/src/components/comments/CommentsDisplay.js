@@ -1,8 +1,8 @@
 import { useEffect, useState, useContext } from "react";
-import { AuthContext } from "../context/user_context";
-import AddComment from "../pages/user/add_comment";
-import HTTPRequester from "../utility/requester";
-import CommentOwnerBar from "./comment_owner_bar";
+import { AuthContext } from "../../context/user_context";
+import AddComment from "./newComment";
+import HTTPRequester from "../../utility/requester";
+import CommentOwnerBar from "./CommentOwnerBar";
 
 export default function CommentDisplay(prop) {
   const [authState, setAuthState] = useContext(AuthContext);

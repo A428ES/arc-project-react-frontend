@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import CommentDropDown from "./comment_drop_down";
+import CommentDropDown from "./comments/CommentDropDown";
 import HTTPRequester from "../utility/requester";
-import PageTitle from "./page_title";
+import PageTitle from "./layout/PageTitle";
 import ReactHtmlParser from "react-html-parser";
 import PaginatedItems from "./pagination";
 
