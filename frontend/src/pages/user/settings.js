@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { AuthContext } from "../../context/user_context";
+import { AuthContext } from "../../context/UserContext";
 import PageTitle from "../../components/page_title";
 import HTTPRequester from "../../utility/requester";
 import { confirmAlert } from "react-confirm-alert";
@@ -106,8 +106,10 @@ export default function MySettings() {
         </p>
         <p>
           <h3>Account Stats</h3>
-          Stories Posted: {authState.userData.story_count}<br />
-          Comments Posted: {authState.userData.comment_count}<br />
+          Stories Posted: {authState.userData.story_count}
+          <br />
+          Comments Posted: {authState.userData.comment_count}
+          <br />
           Member Since: {authState.userData.created}
         </p>
         <br />

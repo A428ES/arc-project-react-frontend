@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import CommentDisplay from "./CommentsDisplay";
 import HTTPRequester from "../../utility/requester";
-import { AuthContext } from "../../context/user_context";
+import { AuthContext } from "../../context/UserContext";
 
 export default function CommentDropDown(prop) {
   const [authState, setAuthState] = useContext(AuthContext);

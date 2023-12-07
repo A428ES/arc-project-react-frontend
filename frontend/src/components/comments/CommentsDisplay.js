@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { AuthContext } from "../../context/user_context";
+import { AuthContext } from "../../context/UserContext";
 import AddComment from "./newComment";
 import HTTPRequester from "../../utility/requester";
 import CommentOwnerBar from "./CommentOwnerBar";

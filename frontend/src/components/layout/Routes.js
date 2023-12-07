@@ -1,12 +1,12 @@
-import CommentDisplay from "../pages/user/comments";
-import UserLogin from "../pages/user/login";
-import RegisterAccount from "../pages/user/register";
-import SearchPage from "../pages/user/search";
-import AddSubmission from "../pages/user/add_submission";
+import CommentDisplay from "../../pages/user/Comments";
+import UserLogin from "../../pages/user/Login";
+import RegisterAccount from "../../pages/user/Register";
+import SearchPage from "../../pages/user/Search";
+import AddSubmission from "../../pages/user/AddContent";
 import AddComment from "../pages/user/add_comment";
-import MyComments from "../pages/user/comments";
-import MySettings from "../pages/user/settings";
-import StoryViewer from "./story_viewer";
+import MyComments from "../../pages/user/Comments";
+import MySettings from "../../pages/user/Settings";
+import StoryViewer from "../StoryViewer";
 import Protected from "../components/protected";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 

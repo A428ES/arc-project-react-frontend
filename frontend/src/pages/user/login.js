@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/user_context";
+import { AuthContext } from "../../context/UserContext";
 import { useContext } from "react";
 import HTTPRequester from "../../utility/requester";
 import PageTitle from "../../components/page_title";

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PageTitle from "../../components/layout/PageTitle";
-import StoryViewer from "../../components/story_viewer";
+import StoryViewer from "../../components/StoryViewer";
 
 export default function SearchPage() {
   const [searchString, setSearchString] = useState();

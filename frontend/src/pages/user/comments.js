@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import CommentDisplay from "../../components/comments/comment_display";
-import { AuthContext } from "../../context/user_context";
+import { AuthContext } from "../../context/UserContext";
 import PageTitle from "../../components/page_title";
 import HTTPRequester from "../../utility/requester";
 

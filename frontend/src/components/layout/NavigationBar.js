@@ -1,5 +1,5 @@
 import React from "react";
-import { AuthContext } from "../../context/user_context";
+import { AuthContext } from "../../context/UserContext";
 import { useContext } from "react";
 
 export default function NavigationBar() {
