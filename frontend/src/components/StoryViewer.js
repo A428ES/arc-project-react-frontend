@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import CommentDropDown from "./comments/CommentDropDown";
-import HTTPRequester from "../utility/requester";
+import HTTPRequester from "../utility/Requester";
 import PageTitle from "./layout/PageTitle";
 import ReactHtmlParser from "react-html-parser";
-import PaginatedItems from "./pagination";
+import PaginatedItems from "./layout/Pagination";
 
 function MarkupBuilder(props) {
   return (
