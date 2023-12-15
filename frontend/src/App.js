@@ -1,10 +1,10 @@
 import "./App.css";
 import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "./context/user_context";
-import HTTPRequester from "./utility/requester";
-import NavigationBar from "./components/navigationbar";
-import AppRoutes from "./components/routes";
-import LoaderSpinner from "./components/util/loader";
+import { AuthContext } from "./context/UserContext";
+import HTTPRequester from "./utility/Requester";
+import NavigationBar from "./components/layout/NavigationBar";
+import AppRoutes from "./components/layout/Routes";
+import LoaderSpinner from "./components/util/LoaderSpinner";
 
 function App() {
   const appStatus = HTTPRequester();
