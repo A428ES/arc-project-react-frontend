@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../context/UserContext";
-import PageTitle from "../../components/page_title";
-import HTTPRequester from "../../utility/requester";
+import PageTitle from "../../components/layout/PageTitle";
+import HTTPRequester from "../../utility/Requester";
 import { confirmAlert } from "react-confirm-alert";
 import { useNavigate } from "react-router";
 

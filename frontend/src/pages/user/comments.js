@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import CommentDisplay from "../../components/comments/comment_display";
+import CommentDisplay from "../../components/comments/CommentsDisplay";
 import { AuthContext } from "../../context/UserContext";
-import PageTitle from "../../components/page_title";
-import HTTPRequester from "../../utility/requester";
+import PageTitle from "../../components/layout/PageTitle";
+import HTTPRequester from "../../utility/Requester";
 
 export default function MyComments() {
   const [newComment, setNewComment] = useState();

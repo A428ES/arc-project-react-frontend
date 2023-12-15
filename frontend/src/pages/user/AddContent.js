@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import HTTPRequester from "../../utility/requester";
-import PageTitle from "../../components/page_title";
+import HTTPRequester from "../../utility/Requester";
+import PageTitle from "../../components/layout/PageTitle";
 import {
   EditorState,
   convertToRaw,

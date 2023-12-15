@@ -3,11 +3,11 @@ import UserLogin from "../../pages/user/Login";
 import RegisterAccount from "../../pages/user/Register";
 import SearchPage from "../../pages/user/Search";
 import AddSubmission from "../../pages/user/AddContent";
-import AddComment from "../pages/user/add_comment";
 import MyComments from "../../pages/user/Comments";
 import MySettings from "../../pages/user/Settings";
+import NewComment from "../comments/NewComment";
 import StoryViewer from "../StoryViewer";
-import Protected from "../components/protected";
+import Protected from "../layout/Protected";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 export default function AppRoutes({ authState }) {
@@ -31,7 +31,7 @@ export default function AppRoutes({ authState }) {
           path="/addcomment"
           element={
             <Protected isLoggedIn={authState.userLoggedIn}>
-              <AddComment />
+              <NewComment />
             </Protected>
           }
         />

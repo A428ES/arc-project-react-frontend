@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/UserContext";
 import { useContext } from "react";
-import HTTPRequester from "../../utility/requester";
-import PageTitle from "../../components/page_title";
+import HTTPRequester from "../../utility/Requester";
+import PageTitle from "../../components/layout/PageTitle";
 
 export default function UserLogin() {
   const navigate = useNavigate();
+  const [authState, setAuthState] = useContext(AuthContext);
   const [userName, setUser] = useState([]);
   const [passWord, setPass] = useState([]);
-  const [authState, setAuthState] = useContext(AuthContext);
   const { dataFeed, errorFeed, submitRequest: getData } = HTTPRequester();
 
   useEffect(() => {

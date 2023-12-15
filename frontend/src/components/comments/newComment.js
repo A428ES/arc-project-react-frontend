@@ -1,46 +1,41 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import HTTPRequester from "../../utility/requester";
+import React, { useEffect } from "react";
+import { useState } from "react";
 
-export default function AddComment(prop) {
-  const [outComeFeed, setFeed] = useState([""]);
+export default function NewComment({ httpRequester, storyID, loggedIn }) {
   const [commentData, setComment] = useState("");
-  const { dataFeed, errorFeed, submitRequest: getData } = HTTPRequester();
-
-  useEffect(() => {
-    if (dataFeed !== null && errorFeed === null) {
-      prop.setNew(true);
-      setFeed(<>Your comment was submitted successful!</>);
-      setComment("");
-    } else if (errorFeed !== null) {
-      setFeed(errorFeed);
-    }
-  }, [dataFeed]);
 
   let handleSubmit = (event) => {
-    getData("comments/submit", "POST", {
+    httpRequester.submitRequest("comments/submit", "POST", {
       comment: commentData,
-      story: prop.storyID,
+      story: storyID,
     });
     event.preventDefault();
   };
 
+  useEffect(() => {
+    setComment("");
+  }, [httpRequester.dataFeed]);
+
   return (
     <>
-      <div class="content">
-        <div class="loginError">{outComeFeed}</div>
-        <form onSubmit={handleSubmit}>
-          <textarea
-            value={commentData}
-            name="comment"
-            rows="10"
-            cols="70"
-            onChange={(e) => setComment(e.target.value)}
-          />
-          <br />
-          <input value="Submit Comment" type="submit" />
-        </form>
-      </div>
+      {loggedIn ? (
+        <div class="content">
+          <div class="loginError">{httpRequester.errorFeed}</div>
+          <form onSubmit={handleSubmit}>
+            <textarea
+              value={commentData}
+              name="comment"
+              rows="10"
+              cols="70"
+              onChange={(e) => setComment(e.target.value)}
+            />
+            <br />
+            <input value="Submit Comment" type="submit" />
+          </form>
+        </div>
+      ) : (
+        <>Please log in to comment.</>
+      )}
     </>
   );
 }
