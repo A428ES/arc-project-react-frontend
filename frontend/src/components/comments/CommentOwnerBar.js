@@ -1,48 +1,32 @@
-import { useEffect, useState } from "react";
-import HTTPRequester from "../../utility/requester";
+import { useState } from "react";
+import DeleteComment from "./DeleteComment";
 
-export default function CommentOwnerBar(prop) {
-  let deleteView = (
-    <header className="articleHeader" id="p1">
-      <a href="javascript:void(0)" onClick={() => handleSubmit()}>
-        Delete Comment
-      </a>
-    </header>
-  );
-  const [outComeFeed, setFeed] = useState([""]);
-
-  const { dataFeed, errorFeed, submitRequest: getData } = HTTPRequester();
-  const [deleteCommentView, delCommentUpdate] = useState(deleteView);
-
-  let handleDelete = () => {
-    getData("comments/delete", "POST", { uuid: prop.commentUUID });
-  };
-
-  useEffect(() => {
-    if (dataFeed !== null && errorFeed === null) {
-      prop.setNew(true);
-      delCommentUpdate("");
-    } else if (errorFeed !== null) {
-      setFeed(errorFeed);
-    }
-  }, [dataFeed]);
+export default function CommentOwnerBar({ httpRequester, commentUUID }) {
+  const [isActive, setActive] = useState(false);
+  const [modContext, setMod] = useState("");
 
   let handleSubmit = () => {
-    delCommentUpdate(
-      <section>
-        Are you sure you want to delete your comment?{" "}
-        <a href="javascript:void(0)" onClick={() => handleDelete()}>
-          Yes
-        </a>{" "}
-        |{" "}
-        <a
-          href="javascript:void(0)"
-          onClick={() => delCommentUpdate(deleteView)}
-        >
-          No
-        </a>
-      </section>
+    setActive(true);
+    setMod(
+      <DeleteComment
+        setActive={setActive}
+        httpRequester={httpRequester}
+        commentUUID={commentUUID}
+        key={commentUUID}
+      />
     );
   };
-  return <>{deleteCommentView}</>;
+  return (
+    <>
+      {isActive === false ? (
+        <header className="articleHeader" id="p1">
+          <a href="javascript:void(0)" onClick={() => handleSubmit()}>
+            Delete Comment
+          </a>
+        </header>
+      ) : (
+        <>{modContext}</>
+      )}
+    </>
+  );
 }
