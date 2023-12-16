@@ -1,18 +1,18 @@
-import { useEffect, useState, useContext } from "react";
+import { useState, useContext } from "react";
 import CommentDisplay from "./CommentsDisplay";
-import HTTPRequester from "../../utility/Requester";
 import { AuthContext } from "../../context/UserContext";
 
 export default function CommentDropDown(prop) {
   const [authState] = useContext(AuthContext);
   const [viewingComment, setView] = useState(false);
-  const [submissions, setSubmissions] = useState(null);
-  const httpRequester = HTTPRequester();
+  const [submissions, setSubmissions] = useState({ results: [] });
 
-  const requestRefresh = () => {
-    httpRequester.submitRequest("comments/display", "POST", {
-      story_id: prop.storyID,
-    });
+  const updateView = () => {
+    if (viewingComment == false) {
+      setView(true);
+    } else {
+      setView(false);
+    }
   };
 
   const getCommentCount = () => {
@@ -23,40 +23,22 @@ export default function CommentDropDown(prop) {
     return 0;
   };
 
-  useEffect(() => {
-    if (!Array.isArray(httpRequester.dataFeed?.results)) {
-      requestRefresh();
-    } else {
-      setSubmissions(httpRequester.dataFeed);
-    }
-  }, [httpRequester.dataFeed]);
-
   return (
     <>
-      {viewingComment === false ? (
-        <header className="articleHeader" id="p2">
-          <a href="javascript:void(0)" onClick={() => setView(true)}>
-            comments ({getCommentCount()})
-          </a>
-        </header>
-      ) : (
-        <>
-          <header className="articleHeader" id="p2">
-            <a href="javascript:void(0)" onClick={() => setView(false)}>
-              Close {getCommentCount()} comments
-            </a>
-          </header>
-          <CommentDisplay
-            key={prop.storyID}
-            httpRequester={httpRequester}
-            submissions={submissions}
-            storyID={prop.storyID}
-            authorUUID={
-              authState.userData ? authState.userData.uuid : undefined
-            }
-          />
-        </>
-      )}
+      <header className="articleHeader" id="p2">
+        <a href="javascript:void(0)" onClick={() => updateView()}>
+          {viewingComment ? <>close</> : <></>} comments ({getCommentCount()})
+        </a>
+      </header>
+      <CommentDisplay
+        key={prop.storyID}
+        viewType="comments/display"
+        submissions={submissions}
+        storyID={prop.storyID}
+        viewing={viewingComment}
+        extraState={setSubmissions}
+        authorUUID={authState.userData ? authState.userData.uuid : undefined}
+      />
     </>
   );
 }
