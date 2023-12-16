@@ -1,20 +1,19 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import CommentDisplay from "../../components/comments/CommentsDisplay";
-import { AuthContext } from "../../context/UserContext";
 import PageTitle from "../../components/layout/PageTitle";
-import HTTPRequester from "../../utility/Requester";
+import { AuthContext } from "../../context/UserContext";
 
 export default function MyComments() {
-  const [newComment, setNewComment] = useState();
+  const [authState] = useContext(AuthContext);
 
   return (
     <>
       <PageTitle text="Viewing Your Comments" />
       <CommentDisplay
+        key="USERCOMMENTS"
+        storyID="USERCOMMENTS"
         viewType="comments/mycomments"
-        storyID={null}
-        setNew={setNewComment}
-        newComment={newComment}
+        authorUUID={authState.userData ? authState.userData.uuid : undefined}
       />
     </>
   );
