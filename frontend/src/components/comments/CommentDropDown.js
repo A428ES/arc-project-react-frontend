@@ -7,26 +7,13 @@ export default function CommentDropDown(prop) {
   const [viewingComment, setView] = useState(false);
   const [submissions, setSubmissions] = useState({ results: [] });
 
-  const updateView = () => {
-    if (viewingComment == false) {
-      setView(true);
-    } else {
-      setView(false);
-    }
-  };
-
-  const getCommentCount = () => {
-    if (Array.isArray(submissions?.results)) {
-      return submissions.results.length;
-    }
-
-    return 0;
-  };
+  const getCommentCount = () =>
+    Array.isArray(submissions?.results) ? submissions.results.length : 0;
 
   return (
     <>
       <header className="articleHeader" id="p2">
-        <a href="javascript:void(0)" onClick={() => updateView()}>
+        <a href="javascript:void(0)" onClick={() => setView(!viewingComment)}>
           {viewingComment ? <>close</> : <></>} comments ({getCommentCount()})
         </a>
       </header>
