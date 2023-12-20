@@ -1,9 +1,16 @@
 import { useContext } from "react";
 import { AuthContext } from "../../context/UserContext";
-import CommentOwnerBar from "./CommentOwnerBar";
+import OwnerBar from "../reusable/OwnerBar";
 
 export default function Comment({ item, httpRequester }) {
   const [authState] = useContext(AuthContext);
+
+  const new_item = {
+    ...item,
+    uuid: item.comment_uuid,
+    type: "Comment",
+    url: "comments",
+  };
 
   return (
     <section>
@@ -12,10 +19,7 @@ export default function Comment({ item, httpRequester }) {
       </header>
       <p className="article">{item.content}</p>
       {authState.userData?.uuid === item.author_uuid && (
-        <CommentOwnerBar
-          commentUUID={item.comment_uuid}
-          httpRequester={httpRequester}
-        />
+        <OwnerBar item={new_item} httpRequester={httpRequester} />
       )}
     </section>
   );
