@@ -8,11 +8,7 @@ export default function CommentDisplay(prop) {
   const [authState] = useContext(AuthContext);
   const [submissions, setSubmissions] = useState(null);
   const httpRequester = HTTPRequester();
-  let inView = prop?.viewing;
-
-  if (inView === undefined) {
-    inView = true;
-  }
+  let inView = prop?.viewing === undefined ? true : prop?.viewing;
 
   const requestRefresh = () => {
     httpRequester.submitRequest(prop.viewType, "POST", {
