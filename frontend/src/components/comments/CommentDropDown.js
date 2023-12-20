@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import CommentDisplay from "./CommentsDisplay";
 import { AuthContext } from "../../context/UserContext";
 
-export default function CommentDropDown(prop) {
+export default function CommentDropDown({ storyID }) {
   const [authState] = useContext(AuthContext);
   const [viewingComment, setView] = useState(false);
   const [submissions, setSubmissions] = useState({ results: [] });
@@ -13,18 +13,17 @@ export default function CommentDropDown(prop) {
   return (
     <>
       <header className="articleHeader" id="p2">
-        <a href="javascript:void(0)" onClick={() => setView(!viewingComment)}>
-          {viewingComment ? <>close</> : <></>} comments ({getCommentCount()})
-        </a>
+        <button onClick={() => setView(!viewingComment)}>
+          {viewingComment ? "Close" : "Comments"} ({getCommentCount()})
+        </button>
       </header>
       <CommentDisplay
-        key={prop.storyID}
         viewType="comments/display"
         submissions={submissions}
-        storyID={prop.storyID}
+        storyID={storyID}
         viewing={viewingComment}
         extraState={setSubmissions}
-        authorUUID={authState.userData ? authState.userData.uuid : undefined}
+        authorUUID={authState.userData?.uuid}
       />
     </>
   );
