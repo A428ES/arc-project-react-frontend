@@ -1,32 +1,18 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import CommentDropDown from "./comments/CommentDropDown";
 import HTTPRequester from "../utility/Requester";
 import PageTitle from "./layout/PageTitle";
-import ReactHtmlParser from "react-html-parser";
 import PaginatedItems from "./layout/Pagination";
+import ContentItem from "./content/Content";
 
 function MarkupBuilder(props) {
+  const httpRequester = HTTPRequester();
+
   return (
     <>
       {props.submissions
         ? props.submissions.map((item) => (
-            <>
-              <section>
-                {" "}
-                <header className="articleHeader" id="p1">
-                  <b>{item.title}</b> by {item.author} on {item.date}
-                </header>
-                <p class="article">
-                  <div>{ReactHtmlParser(item.story)}</div>
-                </p>
-                <CommentDropDown
-                  key={item.uuid}
-                  viewType="comments/display"
-                  storyID={item.uuid}
-                />
-              </section>
-            </>
+            <ContentItem httpRequester={httpRequester} item={item} />
           ))
         : "No results"}
     </>
