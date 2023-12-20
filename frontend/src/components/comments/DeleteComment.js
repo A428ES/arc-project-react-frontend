@@ -3,7 +3,7 @@ export default function DeleteComment({
   commentUUID,
   setActive,
 }) {
-  let handleDelete = () => {
+  const handleDelete = () => {
     httpRequester.submitRequest("comments/delete", "POST", {
       uuid: commentUUID,
     });
@@ -11,19 +11,17 @@ export default function DeleteComment({
 
   return (
     <section>
-      Are you sure you want to delete your comment?{" "}
-      <a href="javascript:void(0)" onClick={() => handleDelete()}>
-        Yes
-      </a>{" "}
-      |{" "}
-      <a
-        href="javascript:void(0)"
-        onClick={() => {
-          setActive(false);
-        }}
-      >
-        No
-      </a>
+      <p>
+        Are you sure you want to delete your comment?
+        <span> </span>
+        <button onClick={handleDelete} className="link-button">
+          Yes
+        </button>
+        <span> | </span>
+        <button onClick={() => setActive(false)} className="link-button">
+          No
+        </button>
+      </p>
     </section>
   );
 }
