@@ -19,7 +19,11 @@ export default function Comment({ item, httpRequester }) {
       </header>
       <p className="article">{item.content}</p>
       {authState.userData?.uuid === item.author_uuid && (
-        <OwnerBar item={new_item} httpRequester={httpRequester} />
+        <OwnerBar
+          key={"ownerbar-" + new_item.uuid}
+          item={new_item}
+          httpRequester={httpRequester}
+        />
       )}
     </section>
   );
