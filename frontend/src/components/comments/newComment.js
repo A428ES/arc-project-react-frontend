@@ -1,8 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
+import { AuthContext } from "../../context/UserContext";
 
-export default function NewComment({ httpRequester, storyID, loggedIn }) {
+export default function NewComment({ httpRequester, storyID }) {
   const [commentData, setComment] = useState("");
+  const [authState] = useContext(AuthContext);
+  let loggedIn = authState.userLoggedIn;
 
   let handleSubmit = (event) => {
     httpRequester.submitRequest("comments/submit", "POST", {
