@@ -6,7 +6,6 @@ export default function ContentItem({ httpRequester, item }) {
   const new_item = {
     ...item,
     type: "Story",
-    uuid: item.story_uuid,
     content: item.story,
     url: "stories",
   };
