@@ -1,9 +1,7 @@
-import { useState, useContext } from "react";
-import CommentDisplay from "./CommentsDisplay";
-import { AuthContext } from "../../context/UserContext";
+import { useState } from "react";
+import Viewer from "../reusable/Viewer";
 
 export default function CommentDropDown({ storyID }) {
-  const [authState] = useContext(AuthContext);
   const [viewingComment, setView] = useState(false);
   const [submissions, setSubmissions] = useState({ results: [] });
 
@@ -17,13 +15,13 @@ export default function CommentDropDown({ storyID }) {
           {viewingComment ? "Close" : "Comments"} ({getCommentCount()})
         </button>
       </header>
-      <CommentDisplay
-        viewType="comments/display"
-        submissions={submissions}
-        storyID={storyID}
-        viewing={viewingComment}
-        extraState={setSubmissions}
-        authorUUID={authState.userData?.uuid}
+      <Viewer
+        url="comments/display"
+        parentId={storyID}
+        inView={viewingComment}
+        updateState={setSubmissions}
+        payload={{ story_id: storyID }}
+        itemType="comment"
       />
     </>
   );
