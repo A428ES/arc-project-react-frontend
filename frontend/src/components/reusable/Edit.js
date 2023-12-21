@@ -32,13 +32,23 @@ export default function Edit({ httpRequester, setActive, item }) {
 
   return (
     <section>
-      <Editor
-        editorState={editorState}
-        toolbarClassName="white-background-editor"
-        wrapperClassName="white-background-editor"
-        editorClassName="white-background-editor"
-        onEditorStateChange={onChange}
-      />
+      {item.type !== "Comment" ? (
+        <Editor
+          editorState={editorState}
+          toolbarClassName="white-background-editor"
+          wrapperClassName="white-background-editor"
+          editorClassName="white-background-editor"
+          onEditorStateChange={onChange}
+        />
+      ) : (
+        <textarea
+          rows={5}
+          cols={75}
+          onChange={(e) => updateContent(e.target.value)}
+        >
+          {item.content}
+        </textarea>
+      )}
       <br />
       <button onClick={() => handleEdit()}>Submit</button>
       <span> | </span>
