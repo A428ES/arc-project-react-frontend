@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import CommentDisplay from "../../components/comments/CommentsDisplay";
 import PageTitle from "../../components/layout/PageTitle";
 import { AuthContext } from "../../context/UserContext";
+import Viewer from "../../components/reusable/Viewer";
 
 export default function MyComments() {
   const [authState] = useContext(AuthContext);
@@ -9,12 +9,7 @@ export default function MyComments() {
   return (
     <>
       <PageTitle text="Viewing Your Comments" />
-      <CommentDisplay
-        key="USERCOMMENTS"
-        storyID="USERCOMMENTS"
-        viewType="comments/mycomments"
-        authorUUID={authState.userData ? authState.userData.uuid : undefined}
-      />
+      <Viewer key="USERCOMMENTS" itemType="comment" url="comments/mycomments" />
     </>
   );
 }
