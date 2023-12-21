@@ -9,6 +9,7 @@ export default function SearchPage() {
   const handleSubmit = (event) => {
     setResults(
       <Viewer
+        key={"search-" + searchString}
         itemType="content"
         payload={{ search: searchString }}
         url="stories/search"
