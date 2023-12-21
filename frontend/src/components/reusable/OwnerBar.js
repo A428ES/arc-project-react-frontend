@@ -18,6 +18,7 @@ export default function OwnerBar({ httpRequester, item }) {
       setActive(true);
       setModContext(
         <ActionComponent
+          key={action + item.uuid}
           setActive={setActive}
           httpRequester={httpRequester}
           item={item}
