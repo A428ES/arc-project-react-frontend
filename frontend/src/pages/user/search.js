@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PageTitle from "../../components/layout/PageTitle";
-import StoryViewer from "../../components/StoryViewer";
+import Viewer from "../../components/reusable/Viewer";
 
 export default function SearchPage() {
   const [searchString, setSearchString] = useState();
@@ -8,10 +8,10 @@ export default function SearchPage() {
 
   const handleSubmit = (event) => {
     setResults(
-      <StoryViewer
-        key={searchString}
-        author="stories/search"
-        search_string={searchString}
+      <Viewer
+        itemType="content"
+        payload={{ search: searchString }}
+        url="stories/search"
       />
     );
   };
