@@ -50,7 +50,11 @@ export default function PaginatedItems(props) {
 
   return (
     <>
-      <props.ComponentCall submissions={currentItems} />
+      <props.ComponentCall
+        submissions={currentItems}
+        httpRequester={props.httpRequester}
+        itemType={props.itemType}
+      />
       <MyPaginate
         breakLabel="..."
         nextLabel="next >"
