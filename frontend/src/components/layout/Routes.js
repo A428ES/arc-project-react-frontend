@@ -6,15 +6,15 @@ import AddSubmission from "../../pages/user/AddContent";
 import MyComments from "../../pages/user/Comments";
 import MySettings from "../../pages/user/Settings";
 import NewComment from "../comments/NewComment";
-import StoryViewer from "../StoryViewer";
 import Protected from "../layout/Protected";
+import Viewer from "../reusable/Viewer";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 export default function AppRoutes({ authState }) {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<StoryViewer author="" />} />
+        <Route path="/" element={<Viewer url="" itemType="content" />} />
         <Route path="/login" element={<UserLogin />} />
         <Route path="/viewcomments" element={<CommentDisplay />} />
         <Route path="/register" element={<RegisterAccount />}></Route>
@@ -48,7 +48,7 @@ export default function AppRoutes({ authState }) {
           path="/mysubmissions"
           element={
             <Protected isLoggedIn={authState.userLoggedIn}>
-              <StoryViewer author="stories/mystories" />
+              <Viewer itemType="content" url="stories/mystories" />
             </Protected>
           }
         />
