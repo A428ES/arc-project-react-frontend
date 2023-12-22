@@ -10,7 +10,7 @@ import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
-export default function Edit({ httpRequester, setActive, item }) {
+export default function Edit({ httpRequester, setActive, item, onClose }) {
   const [updatedContent, updateContent] = useState("");
   const [editorState, setEditorState] = useState(
     EditorState.createWithContent(
@@ -28,6 +28,8 @@ export default function Edit({ httpRequester, setActive, item }) {
       uuid: item.uuid,
       new_content: updatedContent,
     });
+
+    onClose();
   };
 
   return (
@@ -50,9 +52,9 @@ export default function Edit({ httpRequester, setActive, item }) {
         </textarea>
       )}
       <br />
-      <button onClick={() => handleEdit()}>Submit</button>
+      <button onClick={() => handleEdit()}>Submit Edit</button>
       <span> | </span>
-      <button onClick={() => setActive(false)}>Cancel</button>
+      <button onClick={() => onClose()}>Close Editor</button>
     </section>
   );
 }
