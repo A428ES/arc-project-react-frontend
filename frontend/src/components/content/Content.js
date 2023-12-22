@@ -3,6 +3,7 @@ import ReactHtmlParser from "react-html-parser";
 import OwnerBar from "../reusable/OwnerBar";
 
 export default function ContentItem({ httpRequester, item }) {
+  console.log(item);
   const new_item = {
     ...item,
     type: "Story",
@@ -11,23 +12,22 @@ export default function ContentItem({ httpRequester, item }) {
   };
   return (
     <>
-      <section>
-        {" "}
-        <header className="articleHeader" id="p1">
-          <b>{item.title}</b> by {item.author} on {item.date}
-        </header>
-        <p class="article">
-          <div>
-            {ReactHtmlParser(item.story)}
-            <OwnerBar httpRequester={httpRequester} item={new_item} />
-          </div>
-        </p>
-        <CommentDropDown
-          key={item.uuid}
-          viewType="comments/display"
-          storyID={item.uuid}
-        />
-      </section>
+      <div className="article-container">
+        <div className="article-header">
+          <h2>
+            <b>{item.title}</b> by {item.author} on {item.date}
+          </h2>
+          <OwnerBar httpRequester={httpRequester} item={new_item} />
+        </div>
+        <div className="article-content">{ReactHtmlParser(item.story)}</div>
+        <div className="article-footer">
+          <CommentDropDown
+            key={item.uuid}
+            viewType="comments/display"
+            storyID={item.uuid}
+          />
+        </div>
+      </div>
     </>
   );
 }
