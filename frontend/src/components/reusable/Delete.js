@@ -1,8 +1,16 @@
-export default function Delete({ httpRequester, setActive, item }) {
+export default function Delete({
+  httpRequester,
+  setActive,
+  item,
+  setEditorOpen,
+  onClose,
+}) {
   const handleDelete = () => {
     httpRequester.submitRequest(item.url + "/delete", "POST", {
       uuid: item.uuid,
     });
+
+    onClose();
   };
 
   return (
@@ -13,7 +21,7 @@ export default function Delete({ httpRequester, setActive, item }) {
           Yes
         </button>
         <span> | </span>
-        <button onClick={() => setActive(false)} className="link-button">
+        <button onClick={() => onClose()} className="link-button">
           No
         </button>
       </p>
