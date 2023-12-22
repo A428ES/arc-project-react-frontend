@@ -3,7 +3,6 @@ import { useState } from "react";
 import PaginatedItems from "../layout/Pagination";
 import ContentItem from "../content/Content";
 import HTTPRequester from "../../utility/Requester";
-import NewComment from "../comments/NewComment";
 import Comment from "../comments/Comment";
 
 function MarkupBuilder({ submissions, httpRequester, itemType }) {
@@ -30,9 +29,11 @@ export default function Viewer({
   payload = {},
   parentId = null,
   updateState = null,
+  requesterOverride = null,
 }) {
   const [submissions, setSubmissions] = useState("Loading content...");
-  const httpRequester = HTTPRequester();
+  const httpRequester =
+    requesterOverride === null ? new HTTPRequester() : requesterOverride;
 
   const requestRefresh = () => {
     httpRequester.submitRequest(url, "POST", payload);
@@ -50,7 +51,7 @@ export default function Viewer({
   }, [httpRequester.dataFeed]);
 
   return (
-    <section>
+    <>
       {Array.isArray(submissions?.results) && inView === true ? (
         <PaginatedItems
           items={submissions.results}
@@ -62,17 +63,6 @@ export default function Viewer({
       ) : (
         <></>
       )}
-      <>
-        {inView && url === "comments/display" ? (
-          <NewComment
-            key={"newcomment-" + parentId}
-            storyID={parentId}
-            httpRequester={httpRequester}
-          />
-        ) : (
-          <></>
-        )}
-      </>
-    </section>
+    </>
   );
 }
