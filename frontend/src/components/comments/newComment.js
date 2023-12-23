@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { AuthContext } from "../../context/UserContext";
 
-export default function NewComment({ httpRequester, storyID }) {
+export default function NewComment({ httpRequester, storyID, onClose }) {
   const [commentData, setComment] = useState("");
   const [authState] = useContext(AuthContext);
   let loggedIn = authState.userLoggedIn;
@@ -12,6 +12,7 @@ export default function NewComment({ httpRequester, storyID }) {
       comment: commentData,
       story: storyID,
     });
+    onClose();
     event.preventDefault();
   };
 
@@ -34,6 +35,13 @@ export default function NewComment({ httpRequester, storyID }) {
             />
             <br />
             <input value="Submit Comment" type="submit" />
+            <button
+              onClick={() => {
+                onClose();
+              }}
+            >
+              Cancel
+            </button>
           </form>
         </div>
       ) : (

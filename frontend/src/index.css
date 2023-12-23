@@ -17,7 +17,3 @@ code {
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
 }
-
-.white-background-editor {
-  background-color: white;
-}

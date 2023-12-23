@@ -19,7 +19,7 @@ export default function SearchPage() {
 
   return (
     <>
-      <PageTitle text="Search Stories" />
+      <PageTitle text="Search Articles" />
       <section class="centercontent">
         <input
           type="input"

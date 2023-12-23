@@ -17,13 +17,13 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 export default function AddSubmission() {
   const navigate = useNavigate();
   const [storyContent, setStory] = useState("");
-  const [storyTitle, setTitle] = useState("Enter Your Title Here");
+  const [storyTitle, setTitle] = useState("Title Goes Here");
   const [proceessFeed, setFeed] = useState([""]);
   const { dataFeed, errorFeed, submitRequest: getData } = HTTPRequester();
   const [editorState, setEditorState] = useState(
     EditorState.createWithContent(
       ContentState.createFromBlockArray(
-        convertFromHTML("<h3>Enter your story here</h3>")
+        convertFromHTML("<h3>Write here ...</h3>")
       )
     )
   );
@@ -51,7 +51,7 @@ export default function AddSubmission() {
   }, [dataFeed, errorFeed]);
 
   let handleSubmit = (event) => {
-    if (storyTitle !== "Enter Your Title Here") {
+    if (storyTitle !== "Title Goes Here") {
       getData("stories/submit", "POST", {
         title: storyTitle,
         story: storyContent,
@@ -65,7 +65,7 @@ export default function AddSubmission() {
 
   return (
     <>
-      <PageTitle text="Submit New Story" />
+      <PageTitle text="Submit New Article" />
       <section>
         <div className="loginError">{proceessFeed}</div>
         <br />
@@ -77,7 +77,7 @@ export default function AddSubmission() {
               size="30"
               value={storyTitle}
               onClick={(e) =>
-                e.target.value === "Enter Your Title Here"
+                e.target.value === "Title Goes Here"
                   ? setTitle("")
                   : setTitle(e.target.value)
               }
@@ -90,14 +90,14 @@ export default function AddSubmission() {
             <br />
             <Editor
               editorState={editorState}
-              toolbarClassName="toolbarClassName"
-              wrapperClassName="wrapperClassName"
-              editorClassName="editorClassName"
+              toolbarClassName="white-background-editor"
+              wrapperClassName="white-background-editor"
+              editorClassName="white-background-editor"
               onEditorStateChange={onChange}
             />
           </label>
           <br />
-          <input value="Submit Story" type="submit" />
+          <input value="Submit Article" type="submit" />
         </form>
       </section>
     </>

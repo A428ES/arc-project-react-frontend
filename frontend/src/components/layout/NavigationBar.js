@@ -12,7 +12,9 @@ export default function NavigationBar() {
 
   return (
     <>
-      <header id="banner">Untitled Project</header>
+      <header id="banner">
+        <h1>Untitled Project</h1>
+      </header>
       <div id="navigation">
         {authState.userLoggedIn === true ? (
           <>
@@ -20,7 +22,7 @@ export default function NavigationBar() {
               Main Page
             </a>
             <a className="nav" href="addsubmission">
-              Submit Story
+              Submit Article
             </a>
             <a className="nav" href="mysubmissions">
               My Submissions
