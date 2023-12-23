@@ -178,7 +178,7 @@ select {
   font-size: 16px;
   border: 1px solid #ced4da;
   border-radius: 4px;
-  padding: 15px;
+  padding: 5px;
   background-color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   -webkit-appearance: none;
@@ -317,7 +317,7 @@ select::-ms-expand {
 .comment-header {
   background-color: #fff8dc; /* Semi-transparent header */
   color: black;
-  padding: 15px;
+  padding: 5px 5px;
   border-radius: 8px 8px 0 0; /* Rounded corners at the top */
   margin: -20px -20px 20px -20px; /* Align with the outer container */
   display: flex; /* Enable Flexbox */
@@ -328,7 +328,7 @@ select::-ms-expand {
 
 /* Comment Content */
 .comment-content {
-  padding: 15px;
+  padding: 30px;
   color: #333; /* Dark color for readability */
   background-color: #f4f6f8; /* Light grey for differentiation */
   border-radius: 8px; /* Rounded corners */
