@@ -16,6 +16,9 @@ const PopupEditor = ({ item, onSave, onClose, componentToRender }) => {
     <div className="popup-editor">
       <div className="popup-content">
         {componentToRender && componentToRender()}
+        <center>
+          <button onClick={() => onClose()}>Close Window</button>
+        </center>
       </div>
     </div>
   );
