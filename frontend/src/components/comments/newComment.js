@@ -35,6 +35,13 @@ export default function NewComment({ httpRequester, storyID, onClose }) {
             />
             <br />
             <input value="Submit Comment" type="submit" />
+            <button
+              onClick={() => {
+                onClose();
+              }}
+            >
+              Cancel
+            </button>
           </form>
         </div>
       ) : (
